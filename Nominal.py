@@ -1,7 +1,7 @@
 from nltk import CFG, ChartParser
 
 cfg = CFG.fromstring("""
-S -> NP VP | PP NP VP
+S -> NP VP | PP NP VP | WH Aux NP VP
 NP -> ProperNoun | NP CONJ NP | NOUN | ADJ Nominal | DET Nominal | NP VP | Nominal PP | WH | NP Nominal
 VP -> V | V NP | ADV VP
 Nominal -> NOUN | Nominal PP | ADJ Nominal | DET Nominal | Nominal NOUN
@@ -9,12 +9,13 @@ PP -> Prep NP | CONJ NP
 ProperNoun -> 'Bart' | 'Homer' | 'Lisa'
 CONJ -> 'and' | 'when'
 ADV -> 'always' | 'never'
-V -> 'laughs' | 'laughed' | 'drink' | 'wears' | 'serves' | 'drinks' | 'thinks' | 'does' | 'do' | 'wear'
+V -> 'laughs' | 'laughed' | 'drink' | 'wears' | 'serves' | 'drinks' | 'thinks' | 'wear'
 DET -> 'a' | 'the'
 NOUN -> 'milk' | 'shoes' | 'salad' | 'kitchen' | 'midnight' | 'table'
 ADJ -> 'blue' | 'healthy' | 'green'
 Prep -> 'in' | 'before' | 'on'
 WH -> 'when'
+Aux -> 'do' | 'does'
 """)
 
 cfparser = ChartParser(cfg)

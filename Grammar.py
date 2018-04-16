@@ -1,19 +1,20 @@
 from nltk import CFG, ChartParser
 
 cfg = CFG.fromstring("""
-S -> NP VP
-NP -> ProperNoun | NP CONJ NP | NOUN | ADJ NP | DET NP | NP VP | NOUN PP | PP NP | WH
+S -> NP VP | WH Aux NP VP | PP NP VP
+NP -> ProperNoun | NP CONJ NP | NOUN | ADJ NP | DET NP | NP VP | NOUN PP
 VP -> V | V NP | ADV VP | V NP NP
 PP -> Prep NP | CONJ NP
 ProperNoun -> 'Bart' | 'Homer' | 'Lisa'
 CONJ -> 'and' | 'when'
 ADV -> 'always' | 'never'
-V -> 'laughs' | 'laughed' | 'drink' | 'wears' | 'serves' | 'drinks' | 'thinks' | 'does' | 'do' | 'wear'
+V -> 'laughs' | 'laughed' | 'drink' | 'wears' | 'serves' | 'drinks' | 'thinks' | 'wear'
 DET -> 'a' | 'the'
 NOUN -> 'milk' | 'shoes' | 'salad' | 'kitchen' | 'midnight' | 'table'
 ADJ -> 'blue' | 'healthy' | 'green'
 Prep -> 'in' | 'before' | 'on'
 WH -> 'when'
+Aux -> 'does' | 'do'
 """)
 
 cfparser = ChartParser(cfg)
