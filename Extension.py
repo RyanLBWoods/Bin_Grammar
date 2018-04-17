@@ -6,11 +6,16 @@ ugrammar = FeatureGrammar.fromstring("""\
 # Grammar Productions
 # ###################
 # S expansion productions
-S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | PP S | WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil]
+S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | PP S
 S -> NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
+S -> WhNP InvS
+S -> WH InvS
+InvS -> Aux[NUM=?n] S[NUM=pl]
+S[NUM=pl] -> NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
 # Noun Phrase expansion productions
 NP[NUM=?n] -> ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal | NP[NUM=?n] GerundNP
 NP[NUM=pl] -> NP[NUM=?n] CP
+WhNP -> WH NP[NUM=?n]
 # Verb Phrase expansion productions
 VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
 VP[FORM=?f, NUM=?n, SUBCAT=?args] -> V[FORM=?f, NUM=?n, SUBCAT=?args] | ADV V[FORM=?f, NUM=?n, SUBCAT=?args]
@@ -49,13 +54,13 @@ Aux[NUM=sg] -> 'does'
 # ###################
 # Verbs
 # VI
-V[FORM=base, NUM=pl, SUBCAT=nil] -> 'laugh' | 'think'
+V[FORM=base, NUM=pl, SUBCAT=nil] -> 'laugh' | 'think' | 'drink' | 'serve'
 V[FORM=vbz, NUM=sg, SUBCAT=nil] -> 'laughs'
 V[FORM=pret, NUM=?n, SUBCAT=nil] -> 'laughed'
 # VT + NP
 V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drink' | 'wear' | 'serve'
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks' | 'thinks' | 'likes'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]] -> 'thinks'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]] -> 'thinks' | 'think'
 V[FORM=past, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drunk' | 'seen'
 V[FORM=presP, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drinking'
 # VT + NP + PP
@@ -91,7 +96,7 @@ what salad does Bart think Homer serves Lisa
 # Lisa thinks Homer thinks Bart drinks milk
 # Homer never drinks milk in the kitchen before midnight
 # when Homer drinks milk Bart laughs
-# when does Lisa drinks the milk on the table
+# when does Lisa drink the milk on the table
 # when do Lisa and Bart wear shoes
 # Bart laugh
 # when do Homer drinks milk
