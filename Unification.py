@@ -2,23 +2,44 @@ from nltk.grammar import FeatureGrammar
 from nltk import FeatureChartParser
 
 ugrammar = FeatureGrammar.fromstring("""\
+# ###################
+# Grammar Productions
+# ###################
+# S expansion productions
 S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | PP S | WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil]
+# Noun Phrase expansion productions
 NP[NUM=?n] -> ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal
 NP[NUM=pl] -> NP[NUM=?n] CP
+# Verb Phrase expansion productions
 VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
 VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] S
 VP[FORM=?f, NUM=?n, SUBCAT=?args] -> V[FORM=?f, NUM=?n, SUBCAT=?args] | ADV V[FORM=?f, NUM=?n, SUBCAT=?args]
+# Argument expansion productions
 ARG[CAT=np] -> NP[NUM=?n]
 ARG[CAT=pp] -> PP
+# Conjunction Phrase expansion productions
 CP -> CONJ NP[NUM=?n]
+# Prepositional Phrase expansion productions
 PP -> Prep NP[NUM=?n] | CONJ S
+# Nominal expansion productions
 Nominal -> NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n]
+# ###################
+# Lexical Productions
+# ###################
+# Determiners and Nouns
+DET[NUM=sg] -> 'a'
+DET[NUM=?n] -> 'the'
 ProperNoun[NUM=sg] -> 'Bart' | 'Homer' | 'Lisa'
 ProNoun[NUM=sg] -> 'he'
+NOUN[NUM=sg] -> 'milk' | 'salad' | 'kitchen' | 'midnight' | 'table' | 'bread'
+NOUN[NUM=pl] -> 'shoes'
+# Conjunctions and Adverbs
 CONJ -> 'and' | 'when'
 ADV -> 'always' | 'never'
+# Auxiliaries
 Aux[NUM=pl] -> 'do'
 Aux[NUM=sg] -> 'does'
+# Verbs
 V[FORM=base, NUM=pl, SUBCAT=nil] -> 'laugh'
 V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drink' | 'wear'
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks' | 'thinks'
@@ -26,10 +47,7 @@ V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]] -> 'wears' | 'se
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=np, TAIL=nil]]] -> 'serves'
 V[FORM=vbz, NUM=sg, SUBCAT=nil] -> 'laughs'
 V[FORM=pret, NUM=?n, SUBCAT=nil] -> 'laughed'
-DET[NUM=sg] -> 'a'
-DET[NUM=?n] -> 'the'
-NOUN[NUM=sg] -> 'milk' | 'salad' | 'kitchen' | 'midnight' | 'table' | 'bread'
-NOUN[NUM=pl] -> 'shoes'
+# Adjectives, Prepositions and WHs
 ADJ -> 'blue' | 'healthy' | 'green'
 Prep -> 'in' | 'before' | 'on'
 WH -> 'when'
