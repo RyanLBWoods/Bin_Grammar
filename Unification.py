@@ -6,9 +6,7 @@ ugrammar = FeatureGrammar.fromstring("""\
 # Grammar Productions
 # ###################
 # Sentence expansion productions
-S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S | WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil]
-# Subordinate clause
-SC -> S
+S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S | WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
 # Noun Phrase expansion productions
 NP[NUM=?n] -> ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal
 NP[NUM=pl] -> NP[NUM=?n] CP
@@ -74,7 +72,7 @@ Bart always drinks milk
 Lisa thinks Homer thinks Bart drinks milk
 Homer never drinks milk in the kitchen before midnight
 when Homer drinks milk Bart laughs
-when does Lisa drinks the milk on the table
+when does Lisa drink the milk on the table
 when do Lisa and Bart wear shoes
 Bart laugh
 when do Homer drinks milk
