@@ -2,10 +2,10 @@ from nltk import CFG, ChartParser
 
 cfg = CFG.fromstring("""
 S -> NP VP | PP S | WH Aux NP VP
-NP -> ProperNoun | NP CP | NOUN | ADJ Nominal | Nominal | NP Nominal
-VP -> V | V NP | ADV VP | VP S
+NP -> ProperNoun | NP CP | Nominal | DET Nominal
+VP -> V | V NP | ADV VP | VP S | V NP NP
 CP -> CONJ NP
-Nominal -> NOUN | Nominal PP | ADJ Nominal | DET Nominal | Nominal NOUN
+Nominal -> NOUN | Nominal PP | ADJ Nominal | Nominal NOUN
 PP -> Prep NP | CONJ S
 ProperNoun -> 'Bart' | 'Homer' | 'Lisa'
 CONJ -> 'and' | 'when'
