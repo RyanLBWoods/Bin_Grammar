@@ -39,14 +39,19 @@ ADV -> 'always' | 'never'
 # Auxiliaries
 Aux[NUM=pl] -> 'do'
 Aux[NUM=sg] -> 'does'
+# ###################
 # Verbs
+# VI
 V[FORM=base, NUM=pl, SUBCAT=nil] -> 'laugh'
-V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drink' | 'wear'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks' | 'thinks'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]] -> 'wears' | 'serves' | 'drinks' | 'thinks' | 'puts'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=np, TAIL=nil]]] -> 'serves'
 V[FORM=vbz, NUM=sg, SUBCAT=nil] -> 'laughs'
 V[FORM=pret, NUM=?n, SUBCAT=nil] -> 'laughed'
+# VT + NP
+V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drink' | 'wear'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks' | 'thinks'
+# VT + NP + PP
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]] -> 'serves' | 'drinks' | 'puts'
+# VT + NP + NP
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=np, TAIL=nil]]] -> 'serves'
 # Adjectives, Prepositions and WHs
 ADJ -> 'blue' | 'healthy' | 'green'
 Prep -> 'in' | 'before' | 'on'
