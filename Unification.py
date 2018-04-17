@@ -18,7 +18,7 @@ VP[FORM=?f, NUM=?n, SUBCAT=?args] -> V[FORM=?f, NUM=?n, SUBCAT=?args] | ADV V[FO
 # Argument expansion productions
 ARG[CAT=np] -> NP[NUM=?n]
 ARG[CAT=pp] -> PP
-ARG[CAT=s] -> S
+ARG[CAT=subc] -> S
 # Conjunction Phrase expansion productions
 CP -> CONJ NP[NUM=?n]
 # Prepositional Phrase expansion productions
@@ -50,7 +50,8 @@ V[FORM=vbz, NUM=sg, SUBCAT=nil] -> 'laughs'
 V[FORM=pret, NUM=?n, SUBCAT=nil] -> 'laughed'
 # VT + NP
 V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drink' | 'wear'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks' | 'thinks'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]] -> 'thinks'
 # VT + NP + PP
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]] -> 'serves' | 'drinks' | 'puts'
 # VT + NP + NP
