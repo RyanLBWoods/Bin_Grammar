@@ -5,22 +5,25 @@ ugrammar = FeatureGrammar.fromstring("""\
 # ###################
 # Grammar Productions
 # ###################
-# S expansion productions
-S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | PP S | WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil]
+# Sentence expansion productions
+S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S | WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil]
+# Subordinate clause
+SC -> S
 # Noun Phrase expansion productions
 NP[NUM=?n] -> ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal
 NP[NUM=pl] -> NP[NUM=?n] CP
 # Verb Phrase expansion productions
 VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
-VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] S
 VP[FORM=?f, NUM=?n, SUBCAT=?args] -> V[FORM=?f, NUM=?n, SUBCAT=?args] | ADV V[FORM=?f, NUM=?n, SUBCAT=?args]
 # Argument expansion productions
 ARG[CAT=np] -> NP[NUM=?n]
 ARG[CAT=pp] -> PP
+ARG[CAT=s] -> S
 # Conjunction Phrase expansion productions
 CP -> CONJ NP[NUM=?n]
 # Prepositional Phrase expansion productions
-PP -> Prep NP[NUM=?n] | CONJ S
+PP -> Prep NP[NUM=?n]
+AdvC -> CONJ S
 # Nominal expansion productions
 Nominal -> NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n]
 # ###################
