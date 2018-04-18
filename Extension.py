@@ -6,7 +6,7 @@ ugrammar = FeatureGrammar.fromstring("""\
 # Grammar Productions
 # ###################
 # S expansion productions
-S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | PP S
+S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S
 S -> NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
 S -> WhNP InvS
 S -> WH InvS
@@ -28,7 +28,8 @@ ARG[CAT=subc] -> S
 # Conjunction Phrase expansion productions
 CP -> CONJ NP[NUM=?n]
 # Prepositional Phrase expansion productions
-PP -> Prep NP[NUM=?n] | CONJ S
+PP -> Prep NP[NUM=?n]
+AdvC -> CONJ S
 # Nominal expansion productions
 Nominal -> NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n] | GerundNP
 # Modal Phrase expansion productions
