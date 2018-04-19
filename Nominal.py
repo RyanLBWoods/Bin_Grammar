@@ -2,8 +2,8 @@ from nltk import CFG, ChartParser
 
 cfg = CFG.fromstring("""
 S          ->    NP VP | AdvC S | WH Aux NP VP
-NP         ->    ProperNoun | NP CP | Nominal | DET Nominal
-VP         ->    V | V NP | ADV VP | VP S | V NP NP | VP PP
+NP         ->    ProperNoun | NP CP | Nominal | DET Nominal | NP NP
+VP         ->    V | V NP | ADV VP | VP S | V NP | VP PP
 CP         ->    CONJ NP
 Nominal    ->    NOUN | Nominal PP | ADJ Nominal | Nominal NOUN
 PP         ->    Prep NP
