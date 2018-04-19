@@ -11,8 +11,8 @@ S   ->    NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
 S   ->    WhNP InvS
 S   ->    WH InvS
 # Inversed Sentence
-InvS         ->   Aux[NUM=?n] IS[NUM=pl]
-IS[NUM=pl]   ->   NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
+InvS         ->    Aux[NUM=?n] IS[NUM=pl]
+IS[NUM=pl]   ->    NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
 # Noun Phrase
 NP[NUM=?n]   ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal | NP[NUM=?n] GerundNP
 NP[NUM=pl]   ->    NP[NUM=?n] CP
