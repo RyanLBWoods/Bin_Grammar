@@ -5,75 +5,80 @@ ugrammar = FeatureGrammar.fromstring("""\
 # ###################
 # Grammar Productions
 # ###################
-# S expansion productions
-S -> NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S
-S -> NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
-S -> WhNP InvS
-S -> WH InvS
-InvS -> Aux[NUM=?n] IS[NUM=pl]
-IS[NUM=pl] -> NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
-# Noun Phrase expansion productions
-NP[NUM=?n] -> ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal | NP[NUM=?n] GerundNP
-NP[NUM=pl] -> NP[NUM=?n] CP
-WhNP -> WH NP[NUM=?n]
-# Verb Phrase expansion productions
-VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
-VP[FORM=?f, NUM=?n, SUBCAT=?args] -> V[FORM=?f, NUM=?n, SUBCAT=?args] | ADV V[FORM=?f, NUM=?n, SUBCAT=?args]
-VP[FORM=?f, NUM=?n, SUBCAT=?args] -> Aux V[FORM=?f, NUM=?n, SUBCAT=?args]
-MVP[FORM=?f, NUM=?n, SUBCAT=nil] -> MP VP[FORM=?f, NUM=?n, SUBCAT=nil]
-# Argument expansion productions
-ARG[CAT=np] -> NP[NUM=?n]
-ARG[CAT=pp] -> PP
-ARG[CAT=subc] -> S
-# Conjunction Phrase expansion productions
-CP -> CONJ NP[NUM=?n]
-# Prepositional Phrase expansion productions
-PP -> Prep NP[NUM=?n]
-AdvC -> CONJ S
-# Nominal expansion productions
-Nominal -> NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n] | GerundNP
-# Modal Phrase expansion productions
-MP -> MV | MV ADV
-GerundNP -> GerundV NP
-GerundV -> V[FORM=presP]
+# Sentence
+S   ->    NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S
+S   ->    NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
+S   ->    WhNP InvS
+S   ->    WH InvS
+# Inversed Sentence
+InvS         ->   Aux[NUM=?n] IS[NUM=pl]
+IS[NUM=pl]   ->   NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
+# Noun Phrase
+NP[NUM=?n]   ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal | NP[NUM=?n] GerundNP
+NP[NUM=pl]   ->    NP[NUM=?n] CP
+# WH
+WhNP    ->    WH NP[NUM=?n]
+# Verb Phrase
+VP[FORM=?f, NUM=?n, SUBCAT=?rest]   ->    VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
+VP[FORM=?f, NUM=?n, SUBCAT=?args]   ->    V[FORM=?f, NUM=?n, SUBCAT=?args] | ADV V[FORM=?f, NUM=?n, SUBCAT=?args]
+VP[FORM=?f, NUM=?n, SUBCAT=?args]   ->    Aux V[FORM=?f, NUM=?n, SUBCAT=?args]
+# Modal Phrase
+MVP[FORM=?f, NUM=?n, SUBCAT=nil]    ->    MP VP[FORM=?f, NUM=?n, SUBCAT=nil]
+# Modal Verb
+MP    ->    MV | MV ADV
+# Arguments
+ARG[CAT=np]   ->    NP[NUM=?n]
+ARG[CAT=pp]   ->    PP
+ARG[CAT=subc] ->    S
+# Conjunction Phrase
+CP      ->    CONJ NP[NUM=?n]
+# Prepositional Phrase
+PP      ->    Prep NP[NUM=?n]
+# Adverbial Clause
+AdvC    ->    CONJ S
+# Nominal
+Nominal     ->    NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n] | GerundNP
+# Gerund expansion productions
+GerundNP    ->    GerundV NP
+GerundV     ->    V[FORM=presP]
 # ###################
 # Lexical Productions
 # ###################
 # Determiners and Nouns
-DET[NUM=sg] -> 'a'
-DET[NUM=?n] -> 'the'
-ProperNoun[NUM=sg] -> 'Bart' | 'Homer' | 'Lisa'
-ProNoun[NUM=sg] -> 'he'
-NOUN[NUM=sg] -> 'milk' | 'salad' | 'kitchen' | 'midnight' | 'table' | 'bread'
-NOUN[NUM=pl] -> 'shoes'
+DET[NUM=sg]          ->    'a'
+DET[NUM=?n]          ->    'the'
+ProperNoun[NUM=sg]   ->    'Bart' | 'Homer' | 'Lisa'
+ProNoun[NUM=sg]      ->    'he'
+NOUN[NUM=sg]         ->    'milk' | 'salad' | 'kitchen' | 'midnight' | 'table' | 'bread'
+NOUN[NUM=pl]         ->    'shoes'
 # Conjunctions and Adverbs
-CONJ -> 'and' | 'when'
-ADV -> 'always' | 'never' | 'not'
+CONJ    ->    'and' | 'when'
+ADV     ->    'always' | 'never' | 'not'
 # Auxiliaries
-Aux[NUM=pl] -> 'do' | 'have'
-Aux[NUM=sg] -> 'does'
+Aux[NUM=pl]    ->    'do' | 'have'
+Aux[NUM=sg]    ->    'does'
 # ###################
 # Verbs
 # VI
-V[FORM=base, NUM=pl, SUBCAT=nil] -> 'laugh' | 'think' | 'drink' | 'serve'
-V[FORM=vbz, NUM=sg, SUBCAT=nil] -> 'laughs'
-V[FORM=pret, NUM=?n, SUBCAT=nil] -> 'laughed'
+V[FORM=base, NUM=pl, SUBCAT=nil]    ->     'laugh' | 'think' | 'drink' | 'serve'
+V[FORM=vbz, NUM=sg, SUBCAT=nil]     ->     'laughs'
+V[FORM=pret, NUM=?n, SUBCAT=nil]    ->     'laughed'
 # VT + NP
-V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drink' | 'wear' | 'serve'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]] -> 'wears' | 'serves' | 'drinks' | 'thinks' | 'likes'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]] -> 'thinks'
-V[FORM=vbz, NUM=pl, SUBCAT=[HEAD=subc, TAIL=nil]] -> 'think'
-V[FORM=past, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drunk' | 'seen'
-V[FORM=presP, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]] -> 'drinking'
+V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]]    ->    'drink' | 'wear' | 'serve'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]]     ->    'wears' | 'serves' | 'drinks' | 'thinks' | 'likes'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]]   ->    'thinks'
+V[FORM=vbz, NUM=pl, SUBCAT=[HEAD=subc, TAIL=nil]]   ->    'think'
+V[FORM=past, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]]    ->    'drunk' | 'seen'
+V[FORM=presP, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]]   ->    'drinking'
 # VT + NP + PP
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]] -> 'serves' | 'drinks' | 'puts'
 # VT + NP + NP
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=np, TAIL=nil]]] -> 'serves'
 # Adjectives, Prepositions and WHs
-ADJ -> 'blue' | 'healthy' | 'green'
-Prep -> 'in' | 'before' | 'on'
-WH -> 'when' | 'what' | 'whom'
-MV -> 'may'
+ADJ    ->    'blue' | 'healthy' | 'green'
+Prep   ->    'in' | 'before' | 'on'
+WH     ->    'when' | 'what' | 'whom'
+MV     ->    'may'
 """)
 
 uparser = FeatureChartParser(ugrammar)

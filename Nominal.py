@@ -1,23 +1,23 @@
 from nltk import CFG, ChartParser
 
 cfg = CFG.fromstring("""
-S -> NP VP | AdvC S | WH Aux NP VP
-NP -> ProperNoun | NP CP | Nominal | DET Nominal
-VP -> V | V NP | ADV VP | VP S | V NP NP
-CP -> CONJ NP
-Nominal -> NOUN | Nominal PP | ADJ Nominal | Nominal NOUN
-PP -> Prep NP
-AdvC -> CONJ S
-ProperNoun -> 'Bart' | 'Homer' | 'Lisa'
-CONJ -> 'and' | 'when'
-ADV -> 'always' | 'never'
-V -> 'laughs' | 'laughed' | 'drink' | 'wears' | 'serves' | 'drinks' | 'thinks' | 'wear'
-DET -> 'a' | 'the'
-NOUN -> 'milk' | 'shoes' | 'salad' | 'kitchen' | 'midnight' | 'table'
-ADJ -> 'blue' | 'healthy' | 'green'
-Prep -> 'in' | 'before' | 'on'
-WH -> 'when'
-Aux -> 'do' | 'does'
+S          ->    NP VP | AdvC S | WH Aux NP VP
+NP         ->    ProperNoun | NP CP | Nominal | DET Nominal
+VP         ->    V | V NP | ADV VP | VP S | V NP NP
+CP         ->    CONJ NP
+Nominal    ->    NOUN | Nominal PP | ADJ Nominal | Nominal NOUN
+PP         ->    Prep NP
+AdvC       ->    CONJ S
+ProperNoun ->    'Bart' | 'Homer' | 'Lisa'
+CONJ       ->    'and' | 'when'
+ADV        ->    'always' | 'never'
+V          ->    'laughs' | 'laughed' | 'drink' | 'wears' | 'serves' | 'drinks' | 'thinks' | 'wear'
+DET        ->    'a' | 'the'
+NOUN       ->    'milk' | 'shoes' | 'salad' | 'kitchen' | 'midnight' | 'table'
+ADJ        ->    'blue' | 'healthy' | 'green'
+Prep       ->    'in' | 'before' | 'on'
+WH         ->    'when'
+Aux        ->    'do' | 'does'
 """)
 
 cfparser = ChartParser(cfg)
