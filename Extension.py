@@ -37,7 +37,8 @@ PP      ->    Prep NP[NUM=?n]
 # Adverbial Clause
 AdvC    ->    CONJ S
 # Nominal
-Nominal[NUM=?n]     ->    NOUN[NUM=?n] | Nominal[NUM=?n] PP | ADJ Nominal[NUM=?n] | Nominal[NUM=?n] NOUN[NUM=?n] | GerundNP
+Nominal[NUM=?n]     ->    NOUN[NUM=?n] | Nominal[NUM=?n] PP | ADJ Nominal[NUM=?n]
+Nominal[NUM=?n]     ->    Nominal[NUM=?n] NOUN[NUM=?n] | GerundNP
 # Gerund expansion productions
 GerundNP    ->    GerundV NP
 GerundV     ->    V[FORM=presP]
