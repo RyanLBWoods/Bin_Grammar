@@ -14,7 +14,8 @@ S    ->    WH InvS
 InvS         ->    Aux[NUM=?n] IS[NUM=pl]
 IS[NUM=pl]   ->    NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
 # Noun Phrase
-NP[NUM=?n]   ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal[NUM=?n] | DET[NUM=?n] Nominal[NUM=?n] | NP[NUM=?n] GerundNP
+NP[NUM=?n]   ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n]
+NP[NUM=?n]   ->    Nominal[NUM=?n] | DET[NUM=?n] Nominal[NUM=?n] | NP[NUM=?n] GerundNP
 NP[NUM=pl]   ->    NP[NUM=?n] CP
 # WH
 WhNP    ->    WH NP[NUM=?n]
