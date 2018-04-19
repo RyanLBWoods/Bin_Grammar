@@ -14,7 +14,7 @@ S    ->    WH InvS
 InvS         ->    Aux[NUM=?n] IS[NUM=pl]
 IS[NUM=pl]   ->    NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
 # Noun Phrase
-NP[NUM=?n]   ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal | NP[NUM=?n] GerundNP
+NP[NUM=?n]   ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal[NUM=?n] | DET[NUM=?n] Nominal[NUM=?n] | NP[NUM=?n] GerundNP
 NP[NUM=pl]   ->    NP[NUM=?n] CP
 # WH
 WhNP    ->    WH NP[NUM=?n]
@@ -37,7 +37,7 @@ PP      ->    Prep NP[NUM=?n]
 # Adverbial Clause
 AdvC    ->    CONJ S
 # Nominal
-Nominal     ->    NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n] | GerundNP
+Nominal[NUM=?n]     ->    NOUN[NUM=?n] | Nominal[NUM=?n] PP | ADJ Nominal[NUM=?n] | Nominal[NUM=?n] NOUN[NUM=?n] | GerundNP
 # Gerund expansion productions
 GerundNP    ->    GerundV NP
 GerundV     ->    V[FORM=presP]
@@ -64,12 +64,12 @@ V[FORM=base, NUM=pl, SUBCAT=nil]    ->     'laugh' | 'think' | 'drink' | 'serve'
 V[FORM=vbz, NUM=sg, SUBCAT=nil]     ->     'laughs'
 V[FORM=pret, NUM=?n, SUBCAT=nil]    ->     'laughed'
 # VT + NP
-V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]]    ->    'drink' | 'wear' | 'serve'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]]     ->    'wears' | 'serves' | 'drinks' | 'thinks' | 'likes'
-V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]]   ->    'thinks'
-V[FORM=vbz, NUM=pl, SUBCAT=[HEAD=subc, TAIL=nil]]   ->    'think'
-V[FORM=past, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]]    ->    'drunk' | 'seen'
-V[FORM=presP, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]]   ->    'drinking'
+V[FORM=base, NUM=pl, SUBCAT=[HEAD=np, TAIL=nil]]     ->    'drink' | 'wear' | 'serve'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=nil]]      ->    'wears' | 'serves' | 'drinks' | 'thinks' | 'likes'
+V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=subc, TAIL=nil]]    ->    'thinks'
+V[FORM=base, NUM=pl, SUBCAT=[HEAD=subc, TAIL=nil]]   ->    'think'
+V[FORM=past, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]]     ->    'drunk' | 'seen'
+V[FORM=presP, NUM=?n, SUBCAT=[HEAD=np, TAIL=nil]]    ->    'drinking'
 # VT + NP + PP
 V[FORM=vbz, NUM=sg, SUBCAT=[HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]] -> 'serves' | 'drinks' | 'puts'
 # VT + NP + NP

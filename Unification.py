@@ -9,7 +9,7 @@ ugrammar = FeatureGrammar.fromstring("""\
 S    ->    NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S
 S    ->    WH Aux[NUM=?n] NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
 # Noun Phrase
-NP[NUM=?n]    ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal | DET[NUM=?n] Nominal
+NP[NUM=?n]    ->    ProperNoun[NUM=?n] | ProNoun[NUM=?n] | Nominal[NUM=?n] | DET[NUM=?n] Nominal[NUM=?n]
 NP[NUM=pl]    ->    NP[NUM=?n] CP
 # Verb Phrase
 VP[FORM=?f, NUM=?n, SUBCAT=?rest] -> VP[FORM=?f, NUM=?n, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
@@ -24,7 +24,7 @@ CP    ->    CONJ NP[NUM=?n]
 PP    ->    Prep NP[NUM=?n]
 AdvC  ->    CONJ S
 # Nominal expansion productions
-Nominal    ->    NOUN[NUM=?n] | Nominal PP | ADJ Nominal | Nominal NOUN[NUM=?n]
+Nominal[NUM=?n]    ->    NOUN[NUM=?n] | Nominal[NUM=?n] PP | ADJ Nominal[NUM=?n] | Nominal[NUM=?n] NOUN[NUM=?n]
 # ###################
 # Lexical Productions
 # ###################
