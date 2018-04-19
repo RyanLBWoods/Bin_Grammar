@@ -6,10 +6,10 @@ ugrammar = FeatureGrammar.fromstring("""\
 # Grammar Productions
 # ###################
 # Sentence
-S   ->    NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S
-S   ->    NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
-S   ->    WhNP InvS
-S   ->    WH InvS
+S    ->    NP[NUM=?n] VP[FORM=?f, NUM=?n, SUBCAT=nil] | AdvC S
+S    ->    NP[NUM=?n] MVP[FORM=?f, NUM=?n, SUBCAT=nil]
+S    ->    WhNP InvS
+S    ->    WH InvS
 # Inversed Sentence
 InvS         ->    Aux[NUM=?n] IS[NUM=pl]
 IS[NUM=pl]   ->    NP[NUM=?n] VP[FORM=?f, NUM=pl, SUBCAT=nil]
