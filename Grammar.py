@@ -3,7 +3,7 @@ from nltk import CFG, ChartParser
 cfg = CFG.fromstring("""
 S          ->    NP VP | WH Aux NP VP | AdvC S
 NP         ->    ProperNoun | NP CP | NOUN | ADJ NP | DET NP | NOUN PP | NP NP
-VP         ->    V | V NP | ADV VP | V NP | VP S
+VP         ->    V | V NP | ADV VP | V NP | VP S | VP PP
 PP         ->    Prep NP
 CP         ->    CONJ NP
 AdvC       ->    CONJ S
